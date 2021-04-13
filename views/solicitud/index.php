@@ -48,6 +48,7 @@
                  <th >Dias Sin Asignar<a class="ordenar" href="#" data="fechasp"></a></th>
                  <th >Telefono<a class="ordenar" href="#" data="telefono_trabajo"></a></th>
                  <th >Solicitado por<a class="ordenar" href="#" data="solicitadopor"></a></th>
+                 <th >Region<a class="ordenar" href="#" data="region"></a></th>
                  <th></th>
                   <th></th>
                   <th></th>
@@ -91,6 +92,7 @@ if ($solicitud->estado=="Agendado"){
     ?>
        <td><?php echo $solicitud->telefono_trabajo;?></td>
         <td><?php echo $solicitud->solicitadopor;?></td>
+        <td><?php echo $solicitud->region;?></td>
               <td><a  href="<?php echo constant('URL').'solicitud/verSolicitud/'.$solicitud->id; ?>"><i class="fas fa-edit"></i></a></td>
 
 

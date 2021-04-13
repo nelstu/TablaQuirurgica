@@ -24,6 +24,7 @@ class Solicitu
     public $fechaod;
      public $fechaoi;
       public $fechaotr;
+      public $region;
 
 }
 ?>

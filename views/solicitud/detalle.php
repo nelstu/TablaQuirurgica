@@ -96,6 +96,19 @@
 
              <?php }  ?> 
           </div>
+             
+                <div>
+                 <label for="region">Region</label>
+                    <select id="region" name="region" id="region" required class="form-control">
+                        
+                        
+                     </select>
+                 
+                 
+             </div>
+             
+             
+             
            <div class="form-group">
           <label for="observaciones">observaciones</label>
  <textarea  name="observaciones" id="observaciones"  value=""  class="form-control"> <?php echo $this->solicitud->observaciones;?> </textarea>          </div>
@@ -251,6 +264,35 @@
 	.fail(function(){
 		console.log("Fallo!");
 	})
+        
+        //obtener u region
+        	$.ajax({
+		type: 'GET',
+		url : '<?php echo constant('URL')?>solicitud/obteneruregion',
+		dataType: 'json'
+	})
+	.done(function( response){
+        var len = response.length;
+        for(var i=0; i<len; i++){
+                var id = response[i].id;
+                var region = response[i].region;
+ var tr_str = " <option value='"+region+"'";
+            if (estado ===  "<?php  echo  $this->solicitud->region ?>") {
+                tr_str += " selected ";
+                 }
+            tr_str += ">"+region+"</option>";
+                $("#region").append(tr_str);
+            }
+	})
+	.fail(function(){
+		console.log("Fallo!");
+	})
+        
+        
+        //fin obtener u region
+        
+        
+        
  $(".foto").change(function(){
            var imagen=this.files[0];
            console.log("imagen",imagen);

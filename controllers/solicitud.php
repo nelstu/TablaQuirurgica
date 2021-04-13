@@ -29,10 +29,25 @@ $this->verPaginacion('1');
              $estado2 = $this->model->getestado();
            echo json_encode($estado2);
     }
+    
+   public function obtenerregiones(){
+             $regiones2 = $this->model->getregiones();
+           echo json_encode($regiones2);
+    }  
+    
+    
  public function obteneruestado(){
              $estado2 = $this->model->getuestado();
            echo json_encode($estado2);
     }
+    
+   public function obteneruregion(){
+             $regiones2 = $this->model->geturegion();
+           echo json_encode($regiones2);
+    }  
+    
+    
+    
 function imprimir($param=null){
     $id = $param[0];
    $solicitud = $this->model->getById($id);
@@ -483,6 +498,7 @@ $OTR="N";
    $fechaod=$_POST['fechaod'];
    $fechaoi=$_POST['fechaoi'];
    $fechaotr=$_POST['fechaotr'];
+    $region=$_POST['region'];
 
    $ODI=$_POST['ODI'];
  if ($ODI=="on"){
@@ -516,7 +532,7 @@ $OTR="N";
    $estado="Sin Agendar";
    $observaciones=$_POST['observaciones'];
   $mensaje="";
-    if ($this->model->insert([ 'id'=>$id, 'rut'=>$rut, 'nombre'=>$nombre, 'medico'=>$medico, 'cirugia'=>$cirugia, 'ojo'=>$ojo, 'fechasp'=>$fechasp, 'ODI'=>$ODI, 'OD'=>$OD, 'OI'=>$OI, 'OTR'=>$OTR, 'prevision'=>$prevision, 'fechaag'=>$fechaag, 'telefono_trabajo'=>$telefono_trabajo, 'correo_electronico'=>$correo_electronico, 'fecha_nacimiento'=>$fecha_nacimiento, 'estado'=>$estado, 'observaciones'=>$observaciones, 'solicitadopor'=> $_SESSION["usuario"], 'fechaodi'=>$fechaodi, 'fechaod'=>$fechaod, 'fechaoi'=>$fechaoi, 'fechaotr'=>$fechaotr])){
+    if ($this->model->insert([ 'id'=>$id, 'rut'=>$rut, 'nombre'=>$nombre, 'medico'=>$medico, 'cirugia'=>$cirugia, 'ojo'=>$ojo, 'fechasp'=>$fechasp, 'ODI'=>$ODI, 'OD'=>$OD, 'OI'=>$OI, 'OTR'=>$OTR, 'prevision'=>$prevision, 'fechaag'=>$fechaag, 'telefono_trabajo'=>$telefono_trabajo, 'correo_electronico'=>$correo_electronico, 'fecha_nacimiento'=>$fecha_nacimiento, 'estado'=>$estado, 'observaciones'=>$observaciones, 'solicitadopor'=> $_SESSION["usuario"], 'fechaodi'=>$fechaodi, 'fechaod'=>$fechaod, 'fechaoi'=>$fechaoi, 'fechaotr'=>$fechaotr, 'region'=>$region])){
              $mensaje="Nuevo Solicitud Creado";
              /*
   $mail = new PHPMailer(true);

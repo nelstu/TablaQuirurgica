@@ -106,6 +106,21 @@ $items = [];
             return [];
         }
     }
+    
+   public function getregiones(){
+        $items = [];
+        try{
+            $query=$this->db->connect()->query("SELECT * FROM regiones order by codigo ASC");
+           while($row=$query->fetch()){
+                 array_push( $items, $row );
+                  }
+           return $items;
+        }catch(PDOException $e){
+            return [];
+        }
+    }  
+    
+    
  public function getuestado(){
         $items = [];
         try{
@@ -118,6 +133,21 @@ $items = [];
             return [];
         }
     }
+    
+    public function geturegion(){
+        $items = [];
+        try{
+            $query=$this->db->connect()->query("SELECT * FROM regiones order by codigo ASC");
+           while($row=$query->fetch()){
+                 array_push( $items, $row );
+                  }
+           return $items;
+        }catch(PDOException $e){
+            return [];
+        }
+    }
+    
+    
    public function getfolio(){
    try{
        $query=$this->db->connect()->query("SELECT * FROM contador WHERE tipo =0 ");
@@ -178,6 +208,7 @@ $items = [];
                  $item->estado     = $row['estado'];
                  $item->observaciones     = $row['observaciones'];
                   $item->solicitadopor     = $row['solicitadopor'];
+                  $item->region     = $row['region'];
                  array_push($items,$item);
                   }
            return $items;
@@ -247,6 +278,7 @@ $items = [];
                 $item->estado     =$row['estado'];
                 $item->observaciones     =$row['observaciones'];
                  $item->solicitadopor     = $row['solicitadopor'];
+                 $item->region     = $row['region'];
                   array_push($items,$item);
                    }
             return $items;
@@ -282,6 +314,7 @@ $items = [];
                 $item->estado     =$row['estado'];
                 $item->observaciones     =$row['observaciones'];
                  $item->solicitadopor     = $row['solicitadopor'];
+                 $item->region     = $row['region'];
                   array_push($items,$item);
                    }
             return $items;
@@ -319,6 +352,8 @@ $items = [];
                 $item->estado     =$row['estado'];
                 $item->observaciones     =$row['observaciones'];
                  $item->solicitadopor     = $row['solicitadopor'];
+                 
+                  $item->region     = $row['region'];
                   array_push($items,$item);
                    }
             return $items;
@@ -355,6 +390,7 @@ $items = [];
                     $item->fechaod     = $row['fechaod'];
                      $item->fechaoi    = $row['fechaoi'];
                       $item->fechaotr    = $row['fechaotr'];
+                      $item->region     = $row['region'];
                   }
            return $item;
         }catch(PDOException $e){
@@ -395,8 +431,8 @@ public function insertarchivo($datos){
 
 public function insert($datos){
        try{
-         $query=$this->db->connect()->prepare('INSERT INTO solicitud(id,rut,nombre,medico,cirugia,ojo,fechasp,ODI,OD,OI,OTR,prevision,fechaag,telefono_trabajo,correo_electronico,fecha_nacimiento,estado,observaciones,solicitadopor,fechaodi,fechaod,fechaoi,fechaotr) VALUES  (:id,:rut,:nombre,:medico,:cirugia,:ojo,:fechasp,:ODI,:OD,:OI,:OTR,:prevision,:fechaag,:telefono_trabajo,:correo_electronico,:fecha_nacimiento,:estado,:observaciones,:solicitadopor,:fechaodi,:fechaod,:fechaoi,:fechaotr)');
-          $query->execute(['id'=>$datos['id'],'rut'=>$datos['rut'],'nombre'=>$datos['nombre'],'medico'=>$datos['medico'],'cirugia'=>$datos['cirugia'],'ojo'=>$datos['ojo'],'fechasp'=>$datos['fechasp'],'ODI'=>$datos['ODI'],'OD'=>$datos['OD'],'OI'=>$datos['OI'],'OTR'=>$datos['OTR'],'prevision'=>$datos['prevision'],'fechaag'=>$datos['fechaag'],'telefono_trabajo'=>$datos['telefono_trabajo'],'correo_electronico'=>$datos['correo_electronico'],'fecha_nacimiento'=>$datos['fecha_nacimiento'],'estado'=>$datos['estado'],'observaciones'=>$datos['observaciones'],'solicitadopor'=>$datos['solicitadopor'],'fechaodi'=>$datos['fechaodi'],'fechaod'=>$datos['fechaod'],'fechaoi'=>$datos['fechaoi'],'fechaotr'=>$datos['fechaotr']]);
+         $query=$this->db->connect()->prepare('INSERT INTO solicitud(id,rut,nombre,medico,cirugia,ojo,fechasp,ODI,OD,OI,OTR,prevision,fechaag,telefono_trabajo,correo_electronico,fecha_nacimiento,estado,observaciones,solicitadopor,fechaodi,fechaod,fechaoi,fechaotr,region) VALUES  (:id,:rut,:nombre,:medico,:cirugia,:ojo,:fechasp,:ODI,:OD,:OI,:OTR,:prevision,:fechaag,:telefono_trabajo,:correo_electronico,:fecha_nacimiento,:estado,:observaciones,:solicitadopor,:fechaodi,:fechaod,:fechaoi,:fechaotr,:region)');
+          $query->execute(['id'=>$datos['id'],'rut'=>$datos['rut'],'nombre'=>$datos['nombre'],'medico'=>$datos['medico'],'cirugia'=>$datos['cirugia'],'ojo'=>$datos['ojo'],'fechasp'=>$datos['fechasp'],'ODI'=>$datos['ODI'],'OD'=>$datos['OD'],'OI'=>$datos['OI'],'OTR'=>$datos['OTR'],'prevision'=>$datos['prevision'],'fechaag'=>$datos['fechaag'],'telefono_trabajo'=>$datos['telefono_trabajo'],'correo_electronico'=>$datos['correo_electronico'],'fecha_nacimiento'=>$datos['fecha_nacimiento'],'estado'=>$datos['estado'],'observaciones'=>$datos['observaciones'],'solicitadopor'=>$datos['solicitadopor'],'fechaodi'=>$datos['fechaodi'],'fechaod'=>$datos['fechaod'],'fechaoi'=>$datos['fechaoi'],'fechaotr'=>$datos['fechaotr'],'region'=>$datos['region']]);
            return true;
        }catch(PDOException $e){
           return false;

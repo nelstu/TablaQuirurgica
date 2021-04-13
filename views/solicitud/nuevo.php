@@ -101,6 +101,18 @@
            <?php }  ?>
 
           </div>
+             <div>
+                 <label for="region">Region</label>
+                    <select id="region" name="region" id="region" required class="form-control">
+                        
+                        
+                     </select>
+                 
+                 
+             </div>
+             
+             
+             
            <div class="form-group">
           <label for="observaciones">observaciones</label>
  <textarea  name="observaciones" value="" id="observaciones" class="form-control"> </textarea>          </div>
@@ -161,7 +173,27 @@
   .fail(function(){
     console.log("Fallo!");
   })
-
+  //obtener regiones
+    $.ajax({
+    type: 'GET',
+    url : '<?php echo constant('URL')?>solicitud/obtenerregiones',
+    dataType: 'json'
+  })
+  .done(function( response){
+        var len = response.length;
+        $("#region").append(" <option value=''>Seleccionar</option>");
+        for(var i=0; i<len; i++){
+                var id = response[i].id;
+                var regiones = response[i].region;
+                var tr_str = " <option value='"+regiones+"'>"+regiones+"</option>";
+                $("#region").append(tr_str);
+            }
+  })
+  .fail(function(){
+    console.log("Fallo!");
+  })
+  
+//fin obtener regiones
  }); 
 
                $(document).on('click', '#selrazon', function(){
