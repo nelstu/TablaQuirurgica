@@ -22,20 +22,20 @@
 
            <div class="form-group">
           <label for="rut">Rut . , sin digito verificador ni -</label>
-          <input type="text" name="rut" id="rut"   class="form-control"           value=""   >
+          <input type="text" name="rut" id="rut"   class="form-control" required onkeypress="return valideKey(event);"    >
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalrazon">Buscar Paciente</button> 
           </div>
            <div class="form-group">
           <label for="nombre">Nombre Paciente</label>
-          <input type="text" name="nombre" id="nombre"   class="form-control"           value=""   >
+          <input type="text" name="nombre" id="nombre"  required class="form-control"           value=""   >
           </div>
            <div class="form-group">
           <label for="medico">Medico</label>
-          <input type="text" name="medico" id="medico"   class="form-control"           value=""   >
+          <input type="text" name="medico" id="medico"  required class="form-control"           value=""   >
           </div>
            <div class="form-group">
           <label for="cirugia">Cirugia</label>
-          <input type="text" name="cirugia" id="cirugia"   class="form-control"           value=""   >
+          <input type="text" name="cirugia" id="cirugia" required  class="form-control"           value=""   >
           </div>
            <div class="form-group">
           <label for="fechasp">Fecha Solicitud de Pabellon</label>
@@ -154,8 +154,68 @@
   </div>
 </div>
 
+<script type="text/javascript">
+function valideKey(evt){
+    
+    // code is the decimal ASCII representation of the pressed key.
+    var code = (evt.which) ? evt.which : evt.keyCode;
+    
+    if(code==8) { // backspace.
+      return true;
+    } else if(code>=48 && code<=57) { // is a number.
+      return true;
+    } else{ // other keys.
+        Swal.fire({
+  title: 'Error!',
+  text: 'Solo Numeros sin - ni Digito Verificador',
+  icon: 'error',
+  confirmButtonText: 'OK'
+});
+      //  alert("Solo Numeros sin Digito Verificador"); 
+      return false;
+     
+    }
+}
+</script> 
+
+
+
 <script>
     $(document).ready(function(){
+          $("#rut").blur(function() {
+              // alert("1");
+                 //e.preventDefault();
+                 bus=$("#rut").val();
+                 $.ajax({
+                   url: "<?php echo constant('URL');?>solicitud/existeclienterut/"+bus,
+                   type:"POST",
+                   dataType: "json",
+                   data:{
+                      abus: bus
+                   },
+                  })
+                 .then( function ( response ) {
+                     if (response===true){
+                         Swal.fire({
+                              title: 'Error!',
+                              text: 'Paciente ya tiene Solictud',
+                              icon: 'error',
+                              confirmButtonText: 'OK'
+                            });
+                        $("#rut").val("");
+                        $("#rut").focus();
+                        console.log(response);
+                   }
+               });
+              
+              
+          });
+
+        
+        
+        
+        
+        
   $.ajax({
     type: 'GET',
     url : '<?php echo constant('URL')?>solicitud/obtenerestado',

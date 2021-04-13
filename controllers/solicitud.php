@@ -242,6 +242,14 @@ $this->verPaginacion('1');
      $buscardatos=$this->model->getclientesrut($id); 
       echo json_encode($buscardatos);
    }
+   
+    function existeclienterut($param=null){
+      $id = $param[0];
+     $buscardatos=$this->model->getexisteclientesrut($id); 
+      echo json_encode($buscardatos);
+   }
+   
+   
       function buscarclientes($param=null){
        $id = $param[0];
      $buscardatos=$this->model->getclientes($id); 

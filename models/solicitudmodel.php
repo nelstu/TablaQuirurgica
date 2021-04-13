@@ -146,7 +146,18 @@ $items = [];
             return [];
         }
     }
-    
+      public function getexisteclientesrut($Bus){
+   try{
+       $query=$this->db->connect()->query("SELECT * FROM solicitud WHERE rut ='".$Bus."' ");
+      while($row=$query->fetch()){
+              return true;
+            }
+   
+  }catch(PDOException $e){
+     // return $e->getMessage();
+      return "SELECT * FROM solicitud WHERE rut ='"+$Bus+"' ";
+ }
+ }
     
    public function getfolio(){
    try{
